@@ -27,14 +27,14 @@ def test(config):
             ssim_val += tf.reduce_mean(tf.image.ssim(check[index], true[index], 255.0))
             mae_val +=  tf.reduce_mean(tf.abs((check[index] / 255.0) - (true[index] / 255.0)))
 
-    print(psnr_val / 100.0)
-    print(ssim_val / 100.0)
-    print(mae_val / 100.0)
+    print("PSNR:", psnr_val / 100.0)
+    print("SSIM:", ssim_val / 100.0)
+    print("MAE:", mae_val / 100.0)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--check_images_path', type=str, default="./Predict/Output/")
-    parser.add_argument('--ground_truth_images_path', type=str, default="./LOL/Real_captured/Test/Normal")
+    parser.add_argument('--check_images_path', type=str, default="./MethodResult/MyModel")
+    parser.add_argument('--ground_truth_images_path', type=str, default="./MethodResult/GroundTruth")
     config = parser.parse_known_args()[0]
     test(config)
 

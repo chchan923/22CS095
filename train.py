@@ -160,10 +160,10 @@ def predict(config):
             Cb = image[:, :, 2]
 
             new_Y = model.predict(Y)[0]
-            sat2 = (new_Y[:, :, 0] - Y) / (image[:, :, 0] + 0.04)
+            sat = (new_Y[:, :, 0] - Y) / (image[:, :, 0] + 0.04)
 
-            new_Cr = (Cr - 0.5) * sat2 + 0.5
-            new_Cb = (Cb - 0.5) * sat2 + 0.5
+            new_Cr = (Cr - 0.5) * sat + 0.5
+            new_Cb = (Cb - 0.5) * sat + 0.5
 
             image[:, :, 0] = new_Y[:, :, 0]
             image[:, :, 1] = new_Cr
@@ -186,19 +186,19 @@ if __name__ == '__main__':
     parser.add_argument('--mode', type=str, default="predict")
 
     # Train
-    parser.add_argument('--lowlight_train_images_path', type=str, default="./Dataset/Train/Low/")
-    parser.add_argument('--result_train_images_path', type=str, default="./Dataset/Train/Normal/")
+    parser.add_argument('--lowlight_train_images_path', type=str, default="./Dataset/Train/Low")
+    parser.add_argument('--result_train_images_path', type=str, default="./Dataset/Train/Normal")
     
-    parser.add_argument('--lowlight_test_images_path', type=str, default="./Dataset/Test/Low/")
-    parser.add_argument('--result_test_images_path', type=str, default="./Dataset/Test/Normal/")
+    parser.add_argument('--lowlight_test_images_path', type=str, default="./Dataset/Test/Low")
+    parser.add_argument('--result_test_images_path', type=str, default="./Dataset/Test/Normal")
 
     parser.add_argument('--epochs', type=int, default=100)
     parser.add_argument('--train_batch_size', type=int, default=32)
     parser.add_argument('--test_batch_size', type=int, default=16)
 
     # Predict
-    parser.add_argument('--predict_images_input_path', type=str, default="./a/b/")
-    parser.add_argument('--predict_images_output_path', type=str, default="./a/b/")
+    parser.add_argument('--predict_images_input_path', type=str, default="./Predict/Input")
+    parser.add_argument('--predict_images_output_path', type=str, default="./Predict/Output")
 
     config = parser.parse_known_args()[0]
 
